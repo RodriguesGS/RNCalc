@@ -1,11 +1,11 @@
 import { StyleSheet, Text, TouchableOpacity } from 'react-native'
 import React from 'react'
 
-const Button = ({value, typeBtn}: {value: string, typeBtn: 'number' | 'operator' | 'action'}) => {
+const Button = ({value, typeBtn, onPress}: {value: string, typeBtn: 'number' | 'operator' | 'action'; onPress: () => void}) => {
   return (
     <TouchableOpacity style={[styles.btn, {
         backgroundColor: typeBtn === 'number' ? '#232323' : typeBtn === 'operator' ? '#FA4747' : '#8B5CF6'
-    }]} onPress={() => {}}>
+    }]} onPress={onPress}>
         <Text style={styles.btnText}>{value}</Text>
     </TouchableOpacity>
   )

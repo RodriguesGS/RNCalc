@@ -1,5 +1,6 @@
-import { Stack } from "expo-router";
+
+import Calculator from "./components/Calculator";
 
 export default function RootLayout() {
-  return <Stack />;
+  return (<Calculator />)
 }

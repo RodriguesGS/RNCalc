@@ -1,35 +1,101 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { StyleSheet, Text } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import Button from './Button';
 
 const Calculator = () => {
+    const [firstValue, setFirstValue] = useState('')
+    const [displayValue, setDisplayValue] = useState('0')
+    const [operator, setOperator] = useState('')
+
+    const handleNumberInput = (num: string) => {
+        if (displayValue === '0') {
+            setDisplayValue(num)
+        } else {
+            setDisplayValue(displayValue + num)
+        }
+    }
+
+    const handleOperatorInput = (op: string) => {
+        setOperator(op)
+        setFirstValue(displayValue)
+        setDisplayValue('0')
+    }
+
+    const handleCalculation = () => {
+        const num1 = parseFloat(firstValue)
+        const num2 = parseFloat(displayValue)
+
+        if (operator === '+') {
+            setDisplayValue((num1 + num2).toString())
+        }
+
+        switch (operator) {
+            case '+':
+                setDisplayValue((num1 + num2).toString())
+                break
+            case '-':
+                setDisplayValue((num1 - num2).toString())
+                break
+            case '*':
+                setDisplayValue((num1 * num2).toString())
+                break
+            case '/':
+                if (num2 === 0) {
+                    setDisplayValue("Error!!!")
+                    break
+                }
+
+                setDisplayValue((num1 / num2).toString())
+                break
+        }
+
+        setOperator('')
+        setFirstValue('')
+    }
+
+    const handleClear = () => {
+        setDisplayValue('0')
+        setOperator('')
+        setFirstValue('')
+    }
+
+    const handleDelete = () => {
+        if (displayValue.length === 1) {
+            setDisplayValue('0')
+        } else {
+            setDisplayValue(displayValue.slice(0, -1))
+        }
+
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             <SafeAreaView style={styles.screen}>
-                <Text style={styles.screenText}>0</Text>
+                <Text style={styles.minScreenText}>{firstValue + operator}</Text>
+                <Text style={styles.screenText}>{displayValue}</Text>
             </SafeAreaView>
             <SafeAreaView style={styles.keyboard}>
-                <Button value='AC' typeBtn='action'/>
-                <Button value='⌫' typeBtn='action'/>
-                <Button value='%' typeBtn='action'/>
-                <Button value='÷' typeBtn='operator'/>
-                <Button value='7' typeBtn='number'/>
-                <Button value='8' typeBtn='number'/>
-                <Button value='9' typeBtn='number'/>
-                <Button value='x' typeBtn='operator'/>
-                <Button value='6' typeBtn='number'/>
-                <Button value='5' typeBtn='number'/>
-                <Button value='4' typeBtn='number'/>
-                <Button value='-' typeBtn='operator'/>
-                <Button value='1' typeBtn='number'/>
-                <Button value='2' typeBtn='number'/>
-                <Button value='3' typeBtn='number'/>
-                <Button value='+' typeBtn='operator'/>
-                <Button value='0' typeBtn='number'/>
-                <Button value='' typeBtn='number'/>
-                <Button value='.' typeBtn='number'/>
-                <Button value='=' typeBtn='operator'/>
+                <Button value='AC' typeBtn='action' onPress={() => handleClear()}/>
+                <Button value='⌫' typeBtn='action' onPress={() => handleDelete()}/>
+                <Button value='%' typeBtn='action' onPress={() => handleOperatorInput('%')}/>
+                <Button value='÷' typeBtn='operator' onPress={() => handleOperatorInput('/')}/>
+                <Button value='7' typeBtn='number' onPress={() => handleNumberInput('7')}/>
+                <Button value='8' typeBtn='number' onPress={() => handleNumberInput('8')}/>
+                <Button value='9' typeBtn='number' onPress={() => handleNumberInput('9')}/>
+                <Button value='x' typeBtn='operator' onPress={() => handleOperatorInput('*')}/>
+                <Button value='6' typeBtn='number' onPress={() => handleNumberInput('6')}/>
+                <Button value='5' typeBtn='number' onPress={() => handleNumberInput('5')}/>
+                <Button value='4' typeBtn='number' onPress={() => handleNumberInput('4')}/>
+                <Button value='-' typeBtn='operator' onPress={() => handleOperatorInput('-')}/>
+                <Button value='1' typeBtn='number' onPress={() => handleNumberInput('1')}/>
+                <Button value='2' typeBtn='number' onPress={() => handleNumberInput('2')}/>
+                <Button value='3' typeBtn='number' onPress={() => handleNumberInput('3')}/>
+                <Button value='+' typeBtn='operator' onPress={() => handleOperatorInput('+')}/>
+                <Button value='0' typeBtn='number' onPress={() => handleNumberInput('0')}/>
+                <Button value='00' typeBtn='number' onPress={() => handleNumberInput('00')}/>
+                <Button value='.' typeBtn='number' onPress={() => handleNumberInput('.')}/>
+                <Button value='=' typeBtn='operator' onPress={() => handleCalculation}/>
             </SafeAreaView>
         </SafeAreaView>
     );
@@ -55,7 +121,11 @@ const styles = StyleSheet.create({
         fontWeight: 400,
         color: '#B3B3B3'
     },
-
+    minScreenText: {
+        fontSize: 28,
+        fontWeight: 300,
+        color: '#979797ff',
+    },
     keyboard: {
         flex: 2,
         flexDirection: 'row',
