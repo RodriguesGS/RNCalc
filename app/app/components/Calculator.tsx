@@ -7,8 +7,15 @@ const Calculator = () => {
     const [firstValue, setFirstValue] = useState('')
     const [displayValue, setDisplayValue] = useState('0')
     const [operator, setOperator] = useState('')
+    const [reset, resetDisplay] = useState(false)
 
     const handleNumberInput = (num: string) => {
+        if (reset) {
+            setDisplayValue(num)
+            resetDisplay(false)
+            return
+        }
+
         if (displayValue === '0') {
             setDisplayValue(num)
         } else {
@@ -20,15 +27,12 @@ const Calculator = () => {
         setOperator(op)
         setFirstValue(displayValue)
         setDisplayValue('0')
+        resetDisplay(false)
     }
 
     const handleCalculation = () => {
         const num1 = parseFloat(firstValue)
         const num2 = parseFloat(displayValue)
-
-        if (operator === '+') {
-            setDisplayValue((num1 + num2).toString())
-        }
 
         switch (operator) {
             case '+':
@@ -40,24 +44,31 @@ const Calculator = () => {
             case '*':
                 setDisplayValue((num1 * num2).toString())
                 break
+            case '%':
+                setDisplayValue((num1 % num2).toString())
+                break
             case '/':
                 if (num2 === 0) {
-                    setDisplayValue("Error!!!")
+                    setDisplayValue("Error!")
                     break
                 }
 
                 setDisplayValue((num1 / num2).toString())
                 break
+            default:
+                return num2.toString()
         }
 
         setOperator('')
         setFirstValue('')
+        resetDisplay(true)
     }
 
     const handleClear = () => {
         setDisplayValue('0')
         setOperator('')
         setFirstValue('')
+        resetDisplay(false)
     }
 
     const handleDelete = () => {
@@ -92,10 +103,9 @@ const Calculator = () => {
                 <Button value='2' typeBtn='number' onPress={() => handleNumberInput('2')}/>
                 <Button value='3' typeBtn='number' onPress={() => handleNumberInput('3')}/>
                 <Button value='+' typeBtn='operator' onPress={() => handleOperatorInput('+')}/>
-                <Button value='0' typeBtn='number' onPress={() => handleNumberInput('0')}/>
-                <Button value='00' typeBtn='number' onPress={() => handleNumberInput('00')}/>
+                <Button value='0' typeBtn='number' doubleBtn onPress={() => handleNumberInput('0')}/>
                 <Button value='.' typeBtn='number' onPress={() => handleNumberInput('.')}/>
-                <Button value='=' typeBtn='operator' onPress={() => handleCalculation}/>
+                <Button value='=' typeBtn='operator' onPress={() => handleCalculation()}/>
             </SafeAreaView>
         </SafeAreaView>
     );
@@ -118,12 +128,12 @@ const styles = StyleSheet.create({
     },
     screenText: {
         fontSize: 70,
-        fontWeight: 400,
+        fontWeight: '400',
         color: '#B3B3B3'
     },
     minScreenText: {
         fontSize: 28,
-        fontWeight: 300,
+        fontWeight: '300',
         color: '#979797ff',
     },
     keyboard: {
