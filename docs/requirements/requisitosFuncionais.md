@@ -6,11 +6,11 @@
 
 ## RF-02 - Números decimais
 
-**Descrição**: O usuário deve conseguir inserir números decimais (utilizando ponto como separador)
+**Descrição**: O usuário deve conseguir inserir números decimais utilizando ponto (.) como separador
 
 ## RF-03 - Selecionar operação
 
-**Descrição**: O usuário deve conseguir selecionar e escolher uma ou mais operações sendo elas - $+, -, *, /$
+**Descrição**: O usuário deve conseguir selecionar uma das seguintes operações matemáticas: soma (+), subtração (-), módulo (%), multiplicação (*) e divisão (/)
 
 ## RF-04 - Limpar tudo (AC)
 
@@ -22,4 +22,4 @@
 
 ## RF-06 - Apagar ultimo caractere
 
-**Descrição**: Ao clicar em um determinado botão, o usuário deve conseguir apagar o ultimo caractere digitado
+**Descrição**: Ao clicar no botão de apagar, o usuário deve conseguir apagar o ultimo caractere digitado da tela
