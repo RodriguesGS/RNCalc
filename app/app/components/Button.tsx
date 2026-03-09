@@ -25,8 +25,8 @@ export default Button
 
 const styles = StyleSheet.create({
     btn: {
-        width: 70,
-        height: 70,
+        width: '22%',
+        height: '15%',
         borderRadius: 15,
         padding: 10,
         alignItems: 'center',
@@ -37,6 +37,6 @@ const styles = StyleSheet.create({
         color: '#fff'
     },
     doubleBtn: {
-        width: 170
+        width: '48%'
     }
 })

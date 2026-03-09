@@ -91,18 +91,22 @@ const Calculator = () => {
                 <Button value='⌫' typeBtn='action' onPress={() => handleDelete()}/>
                 <Button value='%' typeBtn='action' onPress={() => handleOperatorInput('%')}/>
                 <Button value='÷' typeBtn='operator' onPress={() => handleOperatorInput('/')}/>
+
                 <Button value='7' typeBtn='number' onPress={() => handleNumberInput('7')}/>
                 <Button value='8' typeBtn='number' onPress={() => handleNumberInput('8')}/>
                 <Button value='9' typeBtn='number' onPress={() => handleNumberInput('9')}/>
                 <Button value='x' typeBtn='operator' onPress={() => handleOperatorInput('*')}/>
-                <Button value='6' typeBtn='number' onPress={() => handleNumberInput('6')}/>
-                <Button value='5' typeBtn='number' onPress={() => handleNumberInput('5')}/>
+
                 <Button value='4' typeBtn='number' onPress={() => handleNumberInput('4')}/>
+                <Button value='5' typeBtn='number' onPress={() => handleNumberInput('5')}/>
+                <Button value='6' typeBtn='number' onPress={() => handleNumberInput('6')}/>
                 <Button value='-' typeBtn='operator' onPress={() => handleOperatorInput('-')}/>
+
                 <Button value='1' typeBtn='number' onPress={() => handleNumberInput('1')}/>
                 <Button value='2' typeBtn='number' onPress={() => handleNumberInput('2')}/>
                 <Button value='3' typeBtn='number' onPress={() => handleNumberInput('3')}/>
                 <Button value='+' typeBtn='operator' onPress={() => handleOperatorInput('+')}/>
+
                 <Button value='0' typeBtn='number' doubleBtn onPress={() => handleNumberInput('0')}/>
                 <Button value='.' typeBtn='number' onPress={() => handleNumberInput('.')}/>
                 <Button value='=' typeBtn='operator' onPress={() => handleCalculation()}/>
@@ -124,7 +128,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 40,
         alignItems: 'flex-end',
         justifyContent: 'flex-end'
-        
     },
     screenText: {
         fontSize: 70,
@@ -140,9 +143,10 @@ const styles = StyleSheet.create({
         flex: 2,
         flexDirection: 'row',
         flexWrap: 'wrap',
-        justifyContent: 'center',
-        gap: 30,
-        padding: 30
+        justifyContent: 'center',   
+        alignContent: 'space-evenly',
+        gap: 12,
+        padding: 16
     }
 })
 
